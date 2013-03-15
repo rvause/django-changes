@@ -1,4 +1,4 @@
-# `django-changes`
+# django-changes
 
 A utility to store and access information about changes on objects in a Django
 project.
@@ -47,6 +47,14 @@ You can also do things like this:
 
     Change.objects.all().by_user(someuser)
     changes.get_changes_for(someobj).anonymous()
+
+
+Included is a 'Mixin' for your models that you expect to be recording changes
+on a lot that will give you the reverse relation `changes`
+
+    from changes.models import ChangesMixin
+    # ...
+    class SomeModel(ChangesMixin, models.Model)
 
 
 See the source code for more.
