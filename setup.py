@@ -4,7 +4,7 @@ from setuptools import setup, find_packages
 from changes import __doc__, __version__, __author__, __email__
 
 
-desc = open(os.path.join(os.path.dirname(__file__), 'README.md')).read()
+desc = open(os.path.join(os.path.dirname(__file__), 'README.rst')).read()
 
 
 setup(
