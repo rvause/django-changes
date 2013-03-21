@@ -86,7 +86,7 @@ class Change(models.Model):
         ordering = ['-when']
 
     def __unicode__(self):
-        return _('Change on %s (%s)') % (self.pk, self.c_obj, self.ct)
+        return _('Change on %s (%s)') % (self.c_obj, self.ct)
 
 
 class ChangesMixin(models.Model):
