@@ -86,7 +86,7 @@ class Change(models.Model):
         ordering = ['-when']
 
     def __unicode__(self):
-        return _('Change on %s (%s)') % (self.c_obj, self.ct)
+        return _('Change on %s (%s)') % (self.pk, self.c_obj, self.ct)
 
 
 class ChangesMixin(models.Model):
@@ -99,3 +99,25 @@ class ChangesMixin(models.Model):
 
     class Meta:
         abstract = True
+
+    def save(self, changed=True, **kw):
+        """
+        Add a change for the model upon saving unless changed is set to False
+        """
+        if self.pk and changed:
+            who = kw.pop('who', None)
+            why = kw.pop('why', None)
+            self.add_change(who=who, why=why)
+        super(ChangesMixin, self).save(**kw)
+
+    def add_change(self, **kw):
+        """
+        Add a Change
+        """
+        return Change.objects.add_change_for_object(self, **kw)
+
+    def get_changes(self, **kw):
+        """
+        Get all changes for the object with filters
+        """
+        return Change.objects.get_changes_for_object(self, **kw)

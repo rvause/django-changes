@@ -9,8 +9,10 @@ project.
 Installation
 ============
 
-Add to your Python path or `setup.py install` and add `'changes'` to your
-`INSTALLED_APPS` setting.
+``pip install django-changes``
+
+Add to your Python path or ``setup.py install`` and add ``'changes'`` to your
+``INSTALLED_APPS`` setting.
 
 
 Usage
@@ -54,11 +56,24 @@ You can also do things like this::
 
 
 Included is a 'Mixin' for your models that you expect to be recording changes
-on a lot that will give you the reverse relation `changes`::
+on a lot that will give you the reverse relation ``changes``::
 
     from changes.models import ChangesMixin
     # ...
     class SomeModel(ChangesMixin, models.Model)
+
+This mixin will give you some helpful methods::
+
+    somemodelinstance.add_change(why='Time for change')
+    somemodelinstance.get_changes()
+
+It will also add a change when saving::
+
+    somemodelinstance.save(who=someuser, why='Changing')
+
+You can not save a change when you don't want to::
+
+    somemodelinstance.save(changed=False)
 
 
 See the source code for more.
