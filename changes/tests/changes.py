@@ -102,13 +102,13 @@ class ChangesMixinTestCase(TestCaseWithChangesTestModel):
 
     def test_save(self):
         self.subject.name = 'New Name'
-        self.subject.save(why='For a change')
+        self.subject.save(changed=True, why='For a change')
         all_changes = list(Change.objects.all())
         self.assertEqual(
             list(Change.objects.get_changes_for_object(self.subject)),
             list(all_changes)
         )
-        self.subject.save(changed=False)
+        self.subject.save()
         self.assertEqual(
             list(Change.objects.get_changes_for_object(self.subject)),
             list(all_changes)

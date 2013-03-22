@@ -100,10 +100,11 @@ class ChangesMixin(models.Model):
     class Meta:
         abstract = True
 
-    def save(self, changed=True, **kw):
+    def save(self, changed=False, **kw):
         """
-        Add a change for the model upon saving unless changed is set to False
+        Add a change for the model upon saving if changed is set to True
         """
+        #  TODO: Act on why or who, not require "changed" unless no who or why
         if self.pk and changed:
             who = kw.pop('who', None)
             why = kw.pop('why', None)

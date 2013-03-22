@@ -67,13 +67,13 @@ This mixin will give you some helpful methods::
     somemodelinstance.add_change(why='Time for change')
     somemodelinstance.get_changes()
 
-It will also add a change when saving::
+You can also add a change when saving::
 
-    somemodelinstance.save(who=someuser, why='Changing')
+    somemodelinstance.save(changed=True, who=someuser, why='Changing')
 
-You can not save a change when you don't want to::
+The default behaviour is to not save a change::
 
-    somemodelinstance.save(changed=False)
+    somemodelinstance.save()
 
 
 See the source code for more.
