@@ -6,6 +6,8 @@ from django.conf import settings
 from django.utils.translation import ugettext_lazy as _
 from django.utils import timezone
 
+from .signals import change_added
+
 
 get_ct_for_model = ContentType.objects.get_for_model
 
@@ -115,7 +117,9 @@ class ChangesMixin(models.Model):
         """
         Add a Change
         """
-        return Change.objects.add_change_for_object(self, **kw)
+        change = Change.objects.add_change_for_object(self, **kw)
+        change_added.send(sender=self, change=change)
+        return change
 
     def get_changes(self, **kw):
         """

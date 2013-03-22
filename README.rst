@@ -75,6 +75,9 @@ The default behaviour is to not save a change::
 
     somemodelinstance.save()
 
+The mixin also omits a signal, ``change_added`` when a change is added for the
+object.
+
 
 See the source code for more.
 
