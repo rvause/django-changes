@@ -8,10 +8,7 @@ __all__ = [
 import datetime
 
 from django.test import TestCase
-from django.conf import settings
-from django.core.management import call_command
-from django.db.models import loading
-from django.contrib.auth.models import User
+from django.contrib.auth import get_user_model
 from django.contrib.auth.tests.utils import skipIfCustomUser
 from django.utils.timezone import utc
 
@@ -20,21 +17,10 @@ from ..models import Change
 from models import ChangesTestModel
 
 
-class TestCaseWithChangesTestModel(TestCase):
-    def _pre_setup(self):
-        self._installed_apps = list(settings.INSTALLED_APPS)
-        settings.INSTALLED_APPS += ('changes.tests',)
-        loading.cache.loaded = False
-        call_command('syncdb', interactive=False, verbosity=0)
-        super(TestCaseWithChangesTestModel, self)._pre_setup()
-
-    def _post_teardown(self):
-        super(TestCaseWithChangesTestModel, self)._post_teardown()
-        settings.INSTALLED_APPS = self._installed_apps
-        loading.cache.loaded = False
+User = get_user_model()
 
 
-class ChangesTestCase(TestCaseWithChangesTestModel):
+class ChangesTestCase(TestCase):
     def setUp(self):
         self.subject = ChangesTestModel.objects.create(name='TestModel')
 
@@ -57,7 +43,7 @@ class ChangesTestCase(TestCaseWithChangesTestModel):
 
 
 @skipIfCustomUser
-class ChangesUserTestCase(TestCaseWithChangesTestModel):
+class ChangesUserTestCase(TestCase):
     def setUp(self):
         self.actor = User.objects.create(username='actor')
         self.subject = ChangesTestModel.objects.create(name='TestModel')
@@ -89,7 +75,7 @@ class ChangesUserTestCase(TestCaseWithChangesTestModel):
         )
 
 
-class ChangesMixinTestCase(TestCaseWithChangesTestModel):
+class ChangesMixinTestCase(TestCase):
     def setUp(self):
         self.subject = ChangesTestModel.objects.create(name='TestModel')
 

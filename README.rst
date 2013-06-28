@@ -87,4 +87,4 @@ Need Help?
 
 Email: rvause@gmail.com
 
-Bitbucket: https://bitbucket.org/wearefarm/django-changes
+Github: https://github.com/rvause/django-changes

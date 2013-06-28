@@ -12,7 +12,7 @@ setup(
     version=__version__,
     author=__author__,
     author_email=__email__,
-    url='https://bitbucket.org/wearefarm/django-changes',
+    url='https://github.com/rvause/django-changes',
     description=__doc__,
     long_description=desc,
     license='BSD',
@@ -26,5 +26,7 @@ setup(
         'Operating System :: OS Independent',
         'Programming Language :: Python',
         'Framework :: Django'
-    ]
+    ],
+    test_suite='changes.tests.run_tests.run_tests',
+    tests_require=['Django']
 )
