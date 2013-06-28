@@ -5,6 +5,8 @@ django-changes
 A utility to store and access information about changes on objects in a Django
 project.
 
+|TravisButton|_
+
 
 Installation
 ============
@@ -88,3 +90,7 @@ Need Help?
 Email: rvause@gmail.com
 
 Github: https://github.com/rvause/django-changes
+
+
+.. |TravisButton| image:: https://travis-ci.org/rvause/django-changes.png?branch=master
+.. _TravisButton: https://travis-ci.org/rvause/django-changes
