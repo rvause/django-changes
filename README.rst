@@ -84,6 +84,14 @@ object.
 See the source code for more.
 
 
+Running Test
+============
+
+To run the tests::
+
+    python setup.py test
+
+
 Need Help?
 ==========
 

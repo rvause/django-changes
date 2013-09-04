@@ -34,6 +34,10 @@ class ChangeQuerySet(QuerySet):
 
 class ChangeManager(models.Manager):
     def get_query_set(self):
+        """
+        Use the ChangeQuerySet instead of the default so it's methods can be
+        used along with the manager to further filter querysets.
+        """
         return ChangeQuerySet(self.model, using=self._db)
 
     def add_change_for_object(self, obj, **kw):
